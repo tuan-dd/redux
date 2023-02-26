@@ -1,5 +1,5 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import LoadingScreen from '../components/loadingScreen';
+import LoadingScreen from '../components/LoadingScreen';
 import useAuth from '../hooks/useAuth';
 
 function AuthRequire({ children }) {
