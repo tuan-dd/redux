@@ -2,7 +2,7 @@ import { Box, Card, Pagination, Stack, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { COMMENTS_PER_POST } from '../../app/config';
-import LoadingScreen from '../../components/loadingScreen';
+import LoadingScreen from '../../components/LoadingScreen';
 import CommentCard from './CommentCard';
 import { getComments } from './commentSlice';
 function CommentList({ postId }) {
