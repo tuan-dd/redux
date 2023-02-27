@@ -27,13 +27,14 @@ const InfoStyle = styled('div')(({ theme }) => ({
       bottom: theme.spacing(3),
    },
 }));
-const handleError = (e) => {
-   const pathRandom =
-      adjustPathCover[Math.floor(Math.random() * adjustPathCover.length)];
-   e.target.src = pathRandom;
-   e.target.onError = null;
-};
+
 function ProfileCover({ profile }) {
+   const handleError = (e) => {
+      const pathRandom =
+         adjustPathCover[Math.floor(Math.random() * adjustPathCover.length)];
+      e.target.src = pathRandom;
+      e.target.onError = null;
+   };
    const { avatarUrl, jobTitle, name, coverUrl } = profile;
    return (
       <RootStyle>

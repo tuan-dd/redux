@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { shallowEqual, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import LoadingScreen from '../components/LoadingScreen';
 import Profile from '../features/user/Profile';
 import ProfileCover from '../features/user/ProfileCover';
 import { getTargetUser } from '../features/user/userSlice';
@@ -21,17 +22,23 @@ function UserProfilePage() {
       }
    }, [dispatch, userId]);
    return (
-      <Container sx={{ flexGrow: 1, paddingY: 3 }}>
-         <Card
-            sx={{
-               mb: 3,
-               height: 280,
-               position: 'relative',
-            }}
-         >
-            {selectedUser && <ProfileCover profile={selectedUser} />}
-         </Card>
-         {selectedUser && <Profile profile={selectedUser} />}
+      <Container>
+         {isLoading ? (
+            <LoadingScreen />
+         ) : (
+            <>
+               <Card
+                  sx={{
+                     mb: 3,
+                     height: 280,
+                     position: 'relative',
+                  }}
+               >
+                  {selectedUser && <ProfileCover profile={selectedUser} />}
+               </Card>
+               {selectedUser && <Profile profile={selectedUser} />}
+            </>
+         )}
       </Container>
    );
 }

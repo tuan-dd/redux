@@ -51,7 +51,10 @@ function PostCard({ post }) {
                sx={{ boxShadow: 'none' }}
             >
                <Toolbar disableGutters={true}>
-                  <Avatar alt={user.name} src={user.avatarUrl} />
+                  <Avatar
+                     alt={post?.author.name}
+                     src={post?.author.avatarUrl}
+                  />
                   <Stack sx={{ flexGrow: 1, ml: 1 }}>
                      <Link
                         color='primary.dark'

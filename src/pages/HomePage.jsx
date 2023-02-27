@@ -50,7 +50,7 @@ function HomePage() {
          component: <FriendRequests />,
       },
       {
-         value: 'add_friend',
+         value: 'add friend',
          icon: <PersonAddRoundedIcon sx={{ fontSize: 24 }} />,
          component: <AddFriend />,
       },

@@ -111,6 +111,7 @@ export const getPosts =
             params,
          });
          if (page === 1) dispatch(postSlice.actions.resetPosts());
+
          dispatch(
             postSlice.actions.getPostsSuccess({ ...response.data, page }),
          );

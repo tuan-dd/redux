@@ -58,14 +58,14 @@ function AddFriend() {
       );
    };
    const handleChangeRowsPerPage = (event) => {
+      dispatch(getUsers({ filterName, page: 1, limit: event.target.value }));
       setRowsPerPage(parseInt(event.target.value, 10));
-      dispatch(getUsers({ filterName, page: 1, limit: rowsPerPage }));
       setPage(0);
    };
 
    const handleChangePage = (even, value) => {
-      setPage(value);
       dispatch(getUsers({ filterName, page: value + 1, limit: rowsPerPage }));
+      setPage(value);
    };
 
    return (
@@ -78,7 +78,7 @@ function AddFriend() {
                <SearchInput handleSubmit={handleSubmit} />
                <Box sx={{ flexGrow: 1 }} />
                <Typography
-                  variant='subtitle'
+                  variant='subtitle2'
                   sx={{ color: 'text.secondary', ml: 1 }}
                >
                   {totalUsers > 1

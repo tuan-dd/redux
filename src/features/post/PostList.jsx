@@ -17,16 +17,19 @@ function PostList({ userId }) {
       useSelector((state) => state.post);
    const postRef = useRef(null);
 
-   postRef.current = checked
-      ? currentPagePosts
-           .map((postId) => postsById[postId])
-           .filter((post) => post.author._id === user._id)
-      : currentPagePosts.map((postId) => postsById[postId]);
+   if (userId) {
+      postRef.current = checked
+         ? currentPagePosts
+              .map((postId) => postsById[postId])
+              .filter((post) => post.author._id === user._id)
+         : currentPagePosts.map((postId) => postsById[postId]);
+   }
 
    useEffect(() => {
       if (changePage !== currentPage)
          dispatch(getPosts({ userId, page: changePage }));
-   }, [changePage]);
+      if (userId) dispatch(getPosts({ userId, page: changePage }));
+   }, [changePage, userId]);
 
    useEffect(() => {
       if (currentPage !== changePage) setChangePage(currentPage);
@@ -57,7 +60,7 @@ function PostList({ userId }) {
                      currentPagePosts.length >= totalPosts
                   }
                >
-                  loading more
+                  Load more
                </LoadingButton>
             ) : (
                <Typography variant='h6'>No Post Yet</Typography>
