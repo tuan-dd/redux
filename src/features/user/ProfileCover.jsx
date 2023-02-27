@@ -53,14 +53,13 @@ function ProfileCover({ profile }) {
             />
             <Box
                sx={{
-                  textAlign: { xs: 'center', md: 'left' },
-                  color: 'black',
+                  textAlign: { xs: 'center', md: 'center' },
                }}
             >
-               <Typography variant='h5' color='common.white'>
+               <Typography variant='h5' color='#686de0' sx={{fontWeight:900}}>
                   {name}
                </Typography>
-               <Typography color='common.white'>{jobTitle}</Typography>
+               <Typography color='#686de0'>{jobTitle}</Typography>
             </Box>
          </InfoStyle>
          <Box
