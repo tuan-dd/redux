@@ -9,7 +9,7 @@ const initialState = {
    error: null,
    postsById: {},
    currentPagePosts: [],
-   currentPage: 0,
+   currentPage: 1,
 };
 
 export const postSlice = createSlice({
