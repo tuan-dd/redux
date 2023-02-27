@@ -26,9 +26,8 @@ function PostList({ userId }) {
    }
 
    useEffect(() => {
-      if (changePage !== currentPage)
+      if (changePage !== currentPage || userId)
          dispatch(getPosts({ userId, page: changePage }));
-      if (userId) dispatch(getPosts({ userId, page: changePage }));
    }, [changePage, userId]);
 
    useEffect(() => {
