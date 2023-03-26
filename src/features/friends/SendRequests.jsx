@@ -1,9 +1,8 @@
-import React from 'react';
+/* eslint-disable no-nested-ternary */
 import { useEffect, useRef, useState } from 'react';
-import { Box, Card, Grid, Pagination, Typography } from '@mui/material';
-import { Stack } from '@mui/system';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { Box, Card, Grid, Pagination, Typography, Stack } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+
 import SearchInput from '../../components/SearchInput';
 import UserCard from './UserCard';
 import { getRequest, updateSuccess } from './friendSlice';
@@ -22,16 +21,18 @@ function SendRequests() {
    const usersRef = useRef(null);
 
    const option = 'outgoing';
-   const user = currentPageUsers.map((userId) => usersById[userId]);
+
    useEffect(() => {
       if (isUpdateRequest) {
          usersRef.current = currentPageUsers.map((userId) => usersById[userId]);
          dispatch(updateSuccess('isUpdateRequest'));
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [isUpdateRequest]);
 
    useEffect(() => {
       dispatch(getRequest({ page, totalUsers, option }));
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    const handleSubmit = (valueFilterName) => {
@@ -69,9 +70,9 @@ function SendRequests() {
                />
             </Stack>
             <Grid container spacing={3}>
-               {usersRef.current?.map((user) => (
-                  <Grid item xs={12} key={user._id} md={4}>
-                     <UserCard profile={user} />
+               {usersRef.current?.map((e) => (
+                  <Grid item xs={12} key={e._id} md={4}>
+                     <UserCard profile={e} />
                   </Grid>
                ))}
             </Grid>

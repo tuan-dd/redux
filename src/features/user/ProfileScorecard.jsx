@@ -1,5 +1,6 @@
-import { Card, Divider, Stack, Typography } from '@mui/material';
 import React from 'react';
+import { Card, Divider, Stack, Typography } from '@mui/material';
+
 function ProfileScorecard({ profile }) {
    return (
       <Card sx={{ py: 3 }}>

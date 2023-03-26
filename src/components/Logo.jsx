@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import React from 'react';
 import { Link as LinkRouter } from 'react-router-dom';
 import FbLogo from '../fblogo.png';
+
 function Logo({ disable = false, sx }) {
    const logo = (
       <Box sx={{ height: 40, width: 40, ...sx }}>

@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import apiService from '../../app/apiService';
 import { toast } from 'react-toastify';
+import apiService from '../../app/apiService';
+import { cloudinaryUpload } from '../../utils/cloudinary';
+
 const initialState = {
    isLoading: false,
    error: null,
@@ -51,7 +53,7 @@ export const getCurrentUserProfile = () => async (dispatch) => {
 export const getUpdateUserProfile = (data, userId) => async (dispatch) => {
    dispatch(userSlice.actions.startLoading());
    try {
-      const {
+      let {
          name,
          avatarUrl,
          coverUrl,
@@ -65,6 +67,10 @@ export const getUpdateUserProfile = (data, userId) => async (dispatch) => {
          linkedinLink,
          twitterLink,
       } = data;
+      if (avatarUrl) {
+         const imageUrl = await cloudinaryUpload(avatarUrl);
+         avatarUrl = imageUrl;
+      }
       const response = await apiService.put(`/users/${userId}`, {
          name,
          avatarUrl,

@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { FCheckBox, FormProvider, FTextField } from '../components/form';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation, Link as LinkRouter } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,10 +12,11 @@ import {
    Link,
 } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Visibility from '@mui/icons-material/Visibility';
 import { LoadingButton } from '@mui/lab';
 import useAuth from '../hooks/useAuth';
+import { FCheckBox, FormProvider, FTextField } from '../components/form';
 // import LinkRoute from '../components/link';
 
 const LoginSchema = Yup.object().shape({
@@ -42,7 +42,7 @@ function LoginPage() {
    const [errorMessage, setErrorMessage] = useState('');
    // console.log(defaultValues)
    const navigate = useNavigate();
-   const location = useLocation();
+   let location = useLocation();
    const methods = useForm({
       resolver: yupResolver(LoginSchema),
       defaultValues,
@@ -56,7 +56,7 @@ function LoginPage() {
    const onSubmit = async (data) => {
       // console.log(data);
       try {
-         let from = location.state?.from?.pathname || '/';
+         const from = location.state?.from?.pathname || '/';
          await login(data.email, data.password, () =>
             navigate(from, { replace: true }),
          );
@@ -68,34 +68,30 @@ function LoginPage() {
    };
    useEffect(() => {
       if (isAuthenticated) {
-         let from = location.state?.from?.pathname || '/';
+         const from = location.state?.from?.pathname || '/';
          navigate(from, { replace: true });
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [isAuthenticated]);
-
    return (
       <>
          <Box sx={style}>
-            <Typography variant='h3' textAlign='center'>
-               Login
-            </Typography>
+            <Typography>Login</Typography>
             <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
                <Stack spacing={3}>
                   {errorMessage && (
                      <Alert severity='warning'>{errorMessage.message}</Alert>
                   )}
-                  {
-                     <Alert severity='info'>
-                        Don’t have an account?{' '}
-                        <Link
-                           variant='subtitle2'
-                           component={LinkRouter}
-                           to='/Sign-up'
-                        >
-                           Get started
-                        </Link>
-                     </Alert>
-                  }
+                  <Alert severity='info'>
+                     Don’t have an account?
+                     <Link
+                        variant='subtitle2'
+                        component={LinkRouter}
+                        to='/Sign-up'
+                     >
+                        Get started
+                     </Link>
+                  </Alert>
                   <FTextField name='email' label='Email' />
                   <FTextField
                      name='password'
@@ -153,7 +149,7 @@ function LoginPage() {
                }}
             >
                <Typography
-                  onClick={() => setForgottenPassword((e) => !e)}
+                  // onClick={() => setForgottenPassword((e) => !e)}
                   sx={{
                      textDecorationColor: 'rgba(25, 118, 210, 0.4)',
                      color: '#1976d2',

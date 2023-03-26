@@ -1,13 +1,14 @@
 import React, { useCallback, useRef } from 'react';
-import { FormProvider, FTextField, FUploadImage } from '../../components/form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { createPost } from './postSlice';
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, IconButton, Stack } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
+import { FormProvider, FTextField, FUploadImage } from '../../components/form';
+import { createPost } from './postSlice';
+
 const yupSchema = Yup.object().shape({
    content: Yup.string().required('Content is required'),
 });
@@ -44,7 +45,11 @@ function PostForm() {
       (acceptedFiles) => {
          if (acceptedFiles) {
             const file = acceptedFiles[0];
-
+            console.log(
+               Object.assign(file, {
+                  preview: URL.createObjectURL(file),
+               }),
+            );
             if (file) {
                setValue(
                   'image',

@@ -15,9 +15,10 @@ function FUploadAvatar({ name, ...other }) {
             return (
                <div>
                   <UploadAvatar
+                     accept='image/*'
+                     file={field.value}
                      error={checkError}
                      {...other}
-                     file={field.value}
                   />
                   {checkError && (
                      <FormHelperText error sx={{ px: 2, textAlign: 'center' }}>

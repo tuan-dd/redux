@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import apiService from '../../app/apiService';
 import { POSTS_PER_PAGE } from '../../app/config';
 import { getCurrentUserProfile } from '../user/userSlice';
 import { cloudinaryUpload } from '../../utils/cloudinary';
-import { toast } from 'react-toastify';
+
 const initialState = {
    isLoading: false,
    error: null,
@@ -136,29 +137,7 @@ export const sendUpdatePost = (postId, data) => async (dispatch) => {
       dispatch(postSlice.actions.hasError(error.message));
    }
 };
-export const sendDeletePost = (postId, page, userId) => async (dispatch) => {
-   dispatch(postSlice.actions.startLoading());
-   try {
-      await apiService.delete(`/posts/${postId}`);
-      if (page === 1) {
-         dispatch(updatePostsAfterDelete({ userId }));
-      } else {
-         dispatch(
-            updatePostsAfterDelete({
-               userId,
-               page: 1,
-               limit: page * POSTS_PER_PAGE,
-            }),
-         );
-      }
-      toast.error('Delete success');
-      dispatch(getCurrentUserProfile());
-      return true;
-   } catch (error) {
-      toast.error(error.message);
-      dispatch(postSlice.actions.hasError(error.message));
-   }
-};
+
 export const updatePostsAfterDelete =
    ({ userId, page = 1, limit = POSTS_PER_PAGE }) =>
    async (dispatch) => {
@@ -177,6 +156,30 @@ export const updatePostsAfterDelete =
          dispatch(postSlice.actions.hasError(error.message));
       }
    };
+
+export const sendDeletePost = (postId, page, userId) => async (dispatch) => {
+   dispatch(postSlice.actions.startLoading());
+   try {
+      await apiService.delete(`/posts/${postId}`);
+      if (page === 1) {
+         dispatch(updatePostsAfterDelete({ userId }));
+      } else {
+         dispatch(
+            updatePostsAfterDelete({
+               userId,
+               page: 1,
+               limit: page * POSTS_PER_PAGE,
+            }),
+         );
+      }
+      toast.error('Delete success');
+      dispatch(getCurrentUserProfile());
+      // return true;
+   } catch (error) {
+      toast.error(error.message);
+      dispatch(postSlice.actions.hasError(error.message));
+   }
+};
 
 export const postReaction =
    ({ postId, emoji }) =>

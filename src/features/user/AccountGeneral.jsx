@@ -1,15 +1,16 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import { useCallback } from 'react';
 import { Box, Button, Card, Grid, Typography } from '@mui/material';
-import { FormProvider, FTextField, FUploadAvatar } from '../../components/form';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
 import { useForm } from 'react-hook-form';
-import useAuth from '../../hooks/useAuth';
 import { LoadingButton } from '@mui/lab';
 import { Stack } from '@mui/system';
-import { useDispatch, useSelector } from 'react-redux';
+import { FormProvider, FTextField, FUploadAvatar } from '../../components/form';
+import useAuth from '../../hooks/useAuth';
 import { getUpdateUserProfile } from './userSlice';
-import { useCallback } from 'react';
+
 const yupSchema = Yup.object().shape({
    name: Yup.string().required('Content is required'),
 });
@@ -43,16 +44,16 @@ function AccountGeneral() {
       .map((item) => {
          if (item === 'coverUrl') {
             return { value: item, rows: 1, xs: 12 };
-         } else if (item === 'aboutMe') {
-            return { value: item, rows: 4, xs: 12 };
-         } else {
-            return { value: item, rows: 1, xs: 6 };
          }
+         if (item === 'aboutMe') {
+            return { value: item, rows: 4, xs: 12 };
+         }
+         return { value: item, rows: 1, xs: 6 };
       });
    const dispatch = useDispatch();
    const { isLoading } = useSelector((state) => state.user);
    const onSubmit = (data) => {
-      console.log(data);
+      // console.log(data);
       dispatch(getUpdateUserProfile(data, user._id));
    };
    const handleDrop = useCallback(

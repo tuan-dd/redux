@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import useAuth from '../hooks/useAuth';
+
 import { Box, Card, Container, Tab, Tabs } from '@mui/material';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import PersonAddRoundedIcon from '@mui/icons-material/PersonAddRounded';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import { styled } from '@mui/material/styles';
 
+import useAuth from '../hooks/useAuth';
 import Profile from '../features/user/Profile';
 import FriendRequests from '../features/friends/FriendRequests';
+import ProfileCover from '../features/user/ProfileCover';
 import FriendList from '../features/friends/FriendList';
 import AddFriend from '../features/friends/AddFriend';
-import { styled } from '@mui/material/styles';
-import ProfileCover from '../features/user/ProfileCover';
 
 const TabsWrapperStyle = styled('div')(({ theme }) => ({
    zIndex: 9,

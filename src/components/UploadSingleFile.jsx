@@ -3,8 +3,8 @@ import { useDropzone } from 'react-dropzone';
 
 import { styled } from '@mui/material/styles';
 import { Box, Stack, Typography } from '@mui/material';
-import RejectionFiles from './RejectionFiles';
 import AddAPhotoRoundedIcon from '@mui/icons-material/AddAPhotoRounded';
+import RejectionFiles from './RejectionFiles';
 
 const DropZoneStyle = styled('div')(({ theme }) => ({
    outline: 'none',

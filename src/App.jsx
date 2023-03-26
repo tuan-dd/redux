@@ -1,7 +1,12 @@
 import React from 'react';
 import './App.css';
+import { deepmerge } from '@mui/utils';
+import {
+   Experimental_CssVarsProvider as CssVarsProvider,
+   experimental_extendTheme as extendMuiTheme,
+} from '@mui/material/styles';
+import { extendTheme as extendJoyTheme } from '@mui/joy/styles';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthProvider';
 import BlankLayout from './layouts/BlankLayout';
 import MainLayout from './layouts/MainLayout';
 import AccountPage from './pages/AccountPage';
@@ -12,12 +17,7 @@ import SignUp from './pages/SignUp';
 import UserProfilePage from './pages/UserProfilePage';
 import AuthRequire from './routers/AuthRequire';
 import theme from './theme';
-import { deepmerge } from '@mui/utils';
-import {
-   Experimental_CssVarsProvider as CssVarsProvider,
-   experimental_extendTheme as extendMuiTheme,
-} from '@mui/material/styles';
-import { extendTheme as extendJoyTheme } from '@mui/joy/styles';
+import { AuthProvider } from './contexts/AuthProvider';
 
 const muiTheme = extendMuiTheme(theme);
 const joyTheme = extendJoyTheme({

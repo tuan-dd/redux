@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import { Box, Container, Tab, Tabs, Typography } from '@mui/material';
 import ShareIcon from '@mui/icons-material/Share';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import AccountGeneral from '../features/user/AccountGeneral';
 import AccountSocialLinks from '../features/user/AccountSocialLinks';
-import useAuth from '../hooks/useAuth';
-import { Box, Container, Tab, Tabs, Typography } from '@mui/material';
+
 function AccountPage() {
    const [currentTab, setCurrentTab] = useState('general');
    const ACCOUNT_TABS = [

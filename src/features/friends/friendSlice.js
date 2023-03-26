@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import apiService from '../../app/apiService';
 import { getCurrentUserProfile } from '../user/userSlice';
-import { toast } from 'react-toastify';
+
 const initialState = {
    isLoading: true,
    error: null,
@@ -33,7 +34,9 @@ export const friendSlice = createSlice({
          state.error = null;
          state.isUpdateListFriend = true;
          const { users, totalPages, count } = action.payload;
-         users.forEach((user) => (state.usersById[user._id] = user));
+         users.forEach((user) => {
+            state.usersById[user._id] = user;
+         });
          state.currentPageUsers = users.map((user) => user._id);
          state.totalPages = totalPages;
          state.totalUsers = count;
@@ -43,7 +46,9 @@ export const friendSlice = createSlice({
          state.error = null;
          state.isUpdateRequest = true;
          const { users, totalPages, count } = action.payload;
-         users.forEach((user) => (state.usersById[user._id] = user));
+         users.forEach((user) => {
+            state.usersById[user._id] = user;
+         });
          state.currentPageUsers = users.map((user) => user._id);
          state.totalPages = totalPages;
          state.totalUsers = count;
@@ -52,7 +57,9 @@ export const friendSlice = createSlice({
          state.isLoading = false;
          state.error = null;
          const { users, totalPages, count } = action.payload;
-         users.forEach((user) => (state.usersById[user._id] = user));
+         users.forEach((user) => {
+            state.usersById[user._id] = user;
+         });
          state.currentPageUsers = users.map((user) => user._id);
          state.totalPages = totalPages;
          state.totalUsers = count;
@@ -122,7 +129,7 @@ export const getFriends =
    };
 
 export const getRequest =
-   ({ filterName, page = 1, limit = 4, option }) =>
+   ({ filterName, page = 1, limit = 3, option }) =>
    async (dispatch) => {
       dispatch(friendSlice.actions.startLoading());
       try {
@@ -185,7 +192,7 @@ export const UpdateRequest = (targetUserId, status) => async (dispatch) => {
       const response = await apiService.put(
          `/friends/requests/${targetUserId}`,
          {
-            status: status,
+            status,
          },
       );
       dispatch(friendSlice.actions.UpdateRequestSuccess(response.data));

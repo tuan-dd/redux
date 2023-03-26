@@ -2,12 +2,13 @@ import { LoadingButton } from '@mui/lab';
 import { Box, Typography } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Switch from '@mui/material/Switch';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import useAuth from '../../hooks/useAuth';
 import PostCard from './PostCard';
 import { getPosts } from './postSlice';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
+
 function PostList({ userId }) {
    const dispatch = useDispatch();
    const { user } = useAuth();
@@ -36,14 +37,16 @@ function PostList({ userId }) {
 
    return (
       <>
-         <FormGroup>
-            <FormControlLabel
-               control={<Switch />}
-               label='My Post'
-               checked={checked}
-               onChange={() => setChecked((e) => !e)}
-            />
-         </FormGroup>
+         {userId === user._id && (
+            <FormGroup>
+               <FormControlLabel
+                  control={<Switch />}
+                  label='My Post'
+                  checked={checked}
+                  onChange={() => setChecked((e) => !e)}
+               />
+            </FormGroup>
+         )}
          {postRef.current?.map((post) => (
             <PostCard key={post._id} post={post} />
          ))}
